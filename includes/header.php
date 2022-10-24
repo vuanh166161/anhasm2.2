@@ -45,7 +45,7 @@ include("includes/db.php");
 	   <div id="notification_total_cart" class="shopping-cart">
 	     <img src="images/cart_icon.png" id="cart_image">	
           <div class="noti_cart_number">
-            <?php total_items();?>
+        
           </div><!-- /.noti_cart_number -->		  
 	   </div>
 	  </li>
