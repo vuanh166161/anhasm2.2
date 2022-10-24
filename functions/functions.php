@@ -1,11 +1,19 @@
 
 
 <?php 
-$con = mysqli_connect("localhost","root","","ecommerce_cms_tutorial");
+// $con = mysqli_connect("localhost","root","","ecommerce_cms_tutorial");
+$Connect = pg_connect("postgres://cmvqjnqqlmumse:1dc0a0f9facb2b6081d619eeec13ce6a759ddee3efcc085f309ab8a04814caa4@ec2-54-82-205-3.compute-1.amazonaws.com:5432/d7h1ne0bj2a348
+");
+    //$Connect = pg_connect("host=localhost port=5432 dbname=postgres");
+	//$Connect = pg_connect("host=localhost port=5432 dbname=postgres user=postgres password=123456");
+	
+    if (!$Connect) {
+        die("Connection failed");
+    }
 
-if(mysqli_connect_errno()){
-  echo "The Connection was not established: " . mysqli_connect_error();
-}
+// if(mysqli_connect_errno()){
+//   echo "The Connection was not established: " . mysqli_connect_error();
+// }
 
 function cart(){
   global $con;
