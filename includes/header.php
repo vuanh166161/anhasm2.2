@@ -45,7 +45,7 @@ include("includes/db.php");
 	   <div id="notification_total_cart" class="shopping-cart">
 	     <img src="images/cart_icon.png" id="cart_image">	
           <div class="noti_cart_number">
-        
+            <?php total_items();?>
           </div><!-- /.noti_cart_number -->		  
 	   </div>
 	  </li>
@@ -63,8 +63,8 @@ include("includes/db.php");
   <?php }else{ ?>
   
   <?php 
-  $select_user = mysqli_query($con,"select * from users where id='$_SESSION[user_id] '");
-  $data_user = mysqli_fetch_array($select_user);
+  $select_user = pg_query($con,"select * from users where id='$_SESSION[user_id] '");
+  $data_user = pg_fetch_array($select_user);
   ?>
   
   <div id="profile">

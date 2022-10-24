@@ -24,11 +24,11 @@
  </thead>
  
  <?php 
- $all_brands = mysqli_query($con,"select * from brands order by brand_id DESC ");
+ $all_brands = pg_query($con,"select * from brands order by brand_id DESC ");
  
  $i = 1;
  
- while($row=mysqli_fetch_array($all_brands)){
+ while($row=pg_fetch_array($all_brands)){
  ?>
  
  <tbody>
@@ -66,7 +66,7 @@
 // Delete Brand
 
 if(isset($_GET['delete_brand'])){
-  $delete_brand = mysqli_query($con,"delete from brands where brand_id='$_GET[delete_brand]' ");
+  $delete_brand = pg_query($con,"delete from brands where brand_id='$_GET[delete_brand]' ");
   
   if($delete_brand){
   echo "<script>alert('Product brand has been deleted successfully!')</script>";
@@ -81,14 +81,14 @@ if(isset($_POST['deleteAll'])){
   $remove = $_POST['deleteAll'];
   
   foreach($remove as $key){
-  $run_remove = mysqli_query($con,"delete from brands where brand_id='$key'");
+  $run_remove = pg_query($con,"delete from brands where brand_id='$key'");
   
   if($run_remove){
   echo "<script>alert('Items selected have been removed successfully!')</script>";
   
   echo "<script>window.open('index.php?action=view_brands','_self')</script>";
   }else{
-  echo "<script>alert('Mysqli Failed: mysqli_error($con)!')</script>";
+  echo "<script>alert('pg Failed: pg_error($con)!')</script>";
   }
   }
 }

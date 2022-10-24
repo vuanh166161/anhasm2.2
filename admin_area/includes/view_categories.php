@@ -24,11 +24,11 @@
  </thead>
  
  <?php 
- $all_categories = mysqli_query($con,"select * from categories order by cat_id DESC ");
+ $all_categories = pg_query($con,"select * from categories order by cat_id DESC ");
  
  $i = 1;
  
- while($row=mysqli_fetch_array($all_categories)){
+ while($row=pg_fetch_array($all_categories)){
  ?>
  
  <tbody>
@@ -66,7 +66,7 @@
 // Delete Category
 
 if(isset($_GET['delete_cat'])){
-  $delete_cat = mysqli_query($con,"delete from categories where cat_id='$_GET[delete_cat]' ");
+  $delete_cat = pg_query($con,"delete from categories where cat_id='$_GET[delete_cat]' ");
   
   if($delete_cat){
   echo "<script>alert('Product category has been deleted successfully!')</script>";
@@ -81,14 +81,14 @@ if(isset($_POST['deleteAll'])){
   $remove = $_POST['deleteAll'];
   
   foreach($remove as $key){
-  $run_remove = mysqli_query($con,"delete from categories where cat_id='$key'");
+  $run_remove = pg_query($con,"delete from categories where cat_id='$key'");
   
   if($run_remove){
   echo "<script>alert('Items selected have been removed successfully!')</script>";
   
   echo "<script>window.open('index.php?action=view_cat','_self')</script>";
   }else{
-  echo "<script>alert('Mysqli Failed: mysqli_error($con)!')</script>";
+  echo "<script>alert('pg Failed: pg_error($con)!')</script>";
   }
   }
 }

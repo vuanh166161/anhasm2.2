@@ -32,21 +32,21 @@
 
  if(isset($_POST['login'])){
  
- $email = trim(mysqli_real_escape_string($con,$_POST['email']));
+ $email = trim(pg_real_escape_string($con,$_POST['email']));
  
- $password = trim(mysqli_real_escape_string($con,$_POST['password']));
+ $password = trim(pg_real_escape_string($con,$_POST['password']));
  
  $hash_password = md5($password);
  
  $sel_user = "select * from users where email ='$email' AND password='$hash_password' ";
  
- $run_user = mysqli_query($con, $sel_user) or die ("error: " . mysqli_error($con));
+ $run_user = pg_query($con, $sel_user) or die ("error: " . pg_error($con));
  
- $check_user = mysqli_num_rows($run_user);
+ $check_user = pg_num_rows($run_user);
  
  if($check_user > 0){
  
- $db_row = mysqli_fetch_array($run_user);
+ $db_row = pg_fetch_array($run_user);
  
  $_SESSION['email'] = $db_row['email']; 
  $_SESSION['name'] = $db_row['name'];

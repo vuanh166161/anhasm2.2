@@ -31,9 +31,9 @@
 
 <?php 
 
-$select_user = mysqli_query($con,"select * from users where id='$_SESSION[user_id]' ");
+$select_user = pg_query($con,"select * from users where id='$_SESSION[user_id]' ");
 
-$fetch_user = mysqli_fetch_array($select_user);
+$fetch_user = pg_fetch_array($select_user);
 ?>
 	
 <div class="register_box">
@@ -80,11 +80,11 @@ if(isset($_POST['edit_account'])){
    $current_password = trim($_POST['current_password']);
    $hash_password = md5($current_password);
    
-   $check_exist = mysqli_query($con,"select * from users where email = '$email'");
+   $check_exist = pg_query($con,"select * from users where email = '$email'");
    
-   $email_count = mysqli_num_rows($check_exist);
+   $email_count = pg_num_rows($check_exist);
    
-   $row_register = mysqli_fetch_array($check_exist);
+   $row_register = pg_fetch_array($check_exist);
    
    if($email_count > 0){
    
@@ -95,7 +95,7 @@ if(isset($_POST['edit_account'])){
   	echo "<script>alert('Your Current Password is Wrong!')</script>";
     
 	}else{
-	 $update_email = mysqli_query($con,"update users set email='$email' where id='$_SESSION[user_id]'");
+	 $update_email = pg_query($con,"update users set email='$email' where id='$_SESSION[user_id]'");
 	 
 	 if($update_email){
 	 echo "<script>alert('Your Email was updated successfully!')</script>";

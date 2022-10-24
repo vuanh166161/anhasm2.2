@@ -55,11 +55,11 @@ if(isset($_POST['login'])){
   $password = trim($_POST['password']);
   $password = md5($password);
   
-  $run_login = mysqli_query($con, "select * from users where password='$password' AND email='$email' " );
+  $run_login = pg_query($con, "select * from users where password='$password' AND email='$email' " );
   
-  $check_login = mysqli_num_rows($run_login);
+  $check_login = pg_num_rows($run_login);
   
-  $row_login = mysqli_fetch_array($run_login);
+  $row_login = pg_fetch_array($run_login);
   
   if($check_login == 0){
    echo "<script>alert('Password or email is incorrect, please try again!')</script>";
@@ -67,9 +67,9 @@ if(isset($_POST['login'])){
   }
   $ip = get_ip();
   
-  $run_cart = mysqli_query($con, "select * from cart where ip_address='$ip'");
+  $run_cart = pg_query($con, "select * from cart where ip_address='$ip'");
   
-  $check_cart = mysqli_num_rows($run_cart);
+  $check_cart = pg_num_rows($run_cart);
   
   if($check_login > 0 AND $check_cart==0){
   

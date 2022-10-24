@@ -1,9 +1,9 @@
 
 
 <?php 
-$edit_product = mysqli_query($con,"select * from products where product_id='$_GET[product_id]' ");
+$edit_product = pg_query($con,"select * from products where product_id='$_GET[product_id]' ");
 
-$fetch_edit = mysqli_fetch_array($edit_product);
+$fetch_edit = pg_fetch_array($edit_product);
 ?>
 
     <div class="form_box">
@@ -33,9 +33,9 @@ $fetch_edit = mysqli_fetch_array($edit_product);
 			  <?php 
 			  $get_cats ="select * from categories";
 		
-		$run_cats = mysqli_query($con, $get_cats);
+		$run_cats = pg_query($con, $get_cats);
 		
-		while($row_cats=mysqli_fetch_array($run_cats)){
+		while($row_cats=pg_fetch_array($run_cats)){
 		    $cat_id = $row_cats['cat_id'];
 			
 			$cat_title = $row_cats['cat_title'];
@@ -62,9 +62,9 @@ $fetch_edit = mysqli_fetch_array($edit_product);
 			<?php
 			  $get_brands = "select * from brands";
 		
-		$run_brands = mysqli_query($con, $get_brands);
+		$run_brands = pg_query($con, $get_brands);
 		
-		while($row_brands = mysqli_fetch_array($run_brands)){
+		while($row_brands = pg_fetch_array($run_brands)){
 		     $brand_id = $row_brands['brand_id'];
 			 
 			 $brand_title = $row_brands['brand_title'];
@@ -123,11 +123,11 @@ $fetch_edit = mysqli_fetch_array($edit_product);
 <?php 
 
 if(isset($_POST['edit_product'])){
-   $product_title = trim(mysqli_real_escape_string($con,$_POST['product_title']));
+   $product_title = trim(pg_real_escape_string($con,$_POST['product_title']));
    $product_cat = $_POST['product_cat'];
    $product_brand = $_POST['product_brand'];
    $product_price = $_POST['product_price'];
-   $product_desc = trim(mysqli_real_escape_string($con,$_POST['product_desc']));
+   $product_desc = trim(pg_real_escape_string($con,$_POST['product_desc']));
    $product_keywords = $_POST['product_keywords']; 
    $date = date("F d, Y");
    
@@ -139,12 +139,12 @@ if(isset($_POST['edit_product'])){
    
    if(move_uploaded_file($product_image_tmp,"product_images/$product_image")){
    
-   $update_product = mysqli_query($con,"update products set product_cat='$product_cat', product_brand='$product_brand', product_title='$product_title', product_price='$product_price', product_desc='$product_desc',product_image='$product_image',product_keywords='$product_keywords',date='$date' where product_id='$_GET[product_id]' ");
+   $update_product = pg_query($con,"update products set product_cat='$product_cat', product_brand='$product_brand', product_title='$product_title', product_price='$product_price', product_desc='$product_desc',product_image='$product_image',product_keywords='$product_keywords',date='$date' where product_id='$_GET[product_id]' ");
    
    }
    
    }else{
-   $update_product = mysqli_query($con,"update products set product_cat='$product_cat', product_brand='$product_brand', product_title='$product_title', product_price='$product_price', product_desc='$product_desc',product_keywords='$product_keywords',date='$date' where product_id='$_GET[product_id]' ");
+   $update_product = pg_query($con,"update products set product_cat='$product_cat', product_brand='$product_brand', product_title='$product_title', product_price='$product_price', product_desc='$product_desc',product_keywords='$product_keywords',date='$date' where product_id='$_GET[product_id]' ");
    
    }
    

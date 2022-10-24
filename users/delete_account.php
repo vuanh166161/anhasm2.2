@@ -40,7 +40,7 @@
 <?php 
   if(isset($_POST['yes'])){
   
-   $delete_account = mysqli_query($con,"delete from users where id='$_SESSION[user_id]' ");
+   $delete_account = pg_query($con,"delete from users where id='$_SESSION[user_id]' ");
    
    session_destroy();
    

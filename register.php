@@ -128,11 +128,11 @@ if(isset($_POST['register'])){
    $contact = $_POST['contact'];
    $address = $_POST['address'];
    
-   $check_exist = mysqli_query($con,"select * from users where email = '$email'");
+   $check_exist = pg_query($con,"select * from users where email = '$email'");
    
-   $email_count = mysqli_num_rows($check_exist);
+   $email_count = pg_num_rows($check_exist);
    
-   $row_register = mysqli_fetch_array($check_exist);
+   $row_register = pg_fetch_array($check_exist);
    
    if($email_count > 0){
    echo "<script>alert('Sorry, your email $email address already exist in our database !')</script>";
@@ -141,19 +141,19 @@ if(isset($_POST['register'])){
    
     move_uploaded_file($image_tmp,"upload-files/$image");
 	
-    $run_insert = mysqli_query($con,"insert into users (ip_address,name,email,password,country,city,contact,user_address,image) values ('$ip','$name','$email','$hash_password','$country','$city','$contact','$address','$image') ");
+    $run_insert = pg_query($con,"insert into users (ip_address,name,email,password,country,city,contact,user_address,image) values ('$ip','$name','$email','$hash_password','$country','$city','$contact','$address','$image') ");
     
 	if($run_insert){
-	$sel_user = mysqli_query($con,"select * from users where email='$email' ");
-	$row_user = mysqli_fetch_array($sel_user);
+	$sel_user = pg_query($con,"select * from users where email='$email' ");
+	$row_user = pg_fetch_array($sel_user);
 	
 	$_SESSION['user_id'] = $row_user['id'] ."<br>";
 	$_SESSION['role'] = $row_user['role'];	
 	}
 	
-	$run_cart = mysqli_query($con,"select * from cart where ip_address='$ip'");
+	$run_cart = pg_query($con,"select * from cart where ip_address='$ip'");
 	
-	$check_cart = mysqli_num_rows($run_cart);
+	$check_cart = pg_num_rows($run_cart);
 	
 	if($check_cart == 0){
 	

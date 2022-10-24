@@ -27,11 +27,11 @@
  </thead>
  
  <?php 
- $all_users = mysqli_query($con,"select * from users order by id DESC ");
+ $all_users = pg_query($con,"select * from users order by id DESC ");
  
  $i = 1;
  
- while($row=mysqli_fetch_array($all_users)){
+ while($row=pg_fetch_array($all_users)){
  ?>
  
  <tbody>
@@ -80,7 +80,7 @@
 // Delete User Account
 
 if(isset($_GET['delete_user'])){
-  $delete_user = mysqli_query($con,"delete from users where id='$_GET[delete_user]' ");
+  $delete_user = pg_query($con,"delete from users where id='$_GET[delete_user]' ");
   
   if($delete_user){
   echo "<script>alert('User Account has been deleted successfully!')</script>";
@@ -95,14 +95,14 @@ if(isset($_POST['deleteAll'])){
   $remove = $_POST['deleteAll'];
   
   foreach($remove as $key){
-  $run_remove = mysqli_query($con,"delete from users where id='$key'");
+  $run_remove = pg_query($con,"delete from users where id='$key'");
   
   if($run_remove){
   echo "<script>alert('Items selected have been removed successfully!')</script>";
   
   echo "<script>window.open('index.php?action=view_users','_self')</script>";
   }else{
-  echo "<script>alert('Mysqli Failed: mysqli_error($con)!')</script>";
+  echo "<script>alert('pg Failed: pg_error($con)!')</script>";
   }
   }
 }

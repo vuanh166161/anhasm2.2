@@ -31,9 +31,9 @@
 
 <?php 
 
-$select_user = mysqli_query($con,"select * from users where id='$_SESSION[user_id]' ");
+$select_user = pg_query($con,"select * from users where id='$_SESSION[user_id]' ");
 
-$fetch_user = mysqli_fetch_array($select_user);
+$fetch_user = pg_fetch_array($select_user);
 ?>
 	
 <div class="register_box">
@@ -90,10 +90,10 @@ if(isset($_POST['change_password'])){
    $hash_new_password = md5($new_password);
    $confirm_new_password = trim($_POST['confirm_new_password']);
   
-   $select_password = mysqli_query($con,"select * from users where password='$hash_current_password' and id='$_SESSION[user_id]' ");
+   $select_password = pg_query($con,"select * from users where password='$hash_current_password' and id='$_SESSION[user_id]' ");
    
    //Check if current password not empty
-   if(mysqli_num_rows($select_password) == 0){
+   if(pg_num_rows($select_password) == 0){
     
 	echo "<script>alert('Your Current Password is Wrong!')</script>";
    
@@ -102,7 +102,7 @@ if(isset($_POST['change_password'])){
     echo "<script>alert('Password do not match!')</script>";
 	
    }else{
-    $update = mysqli_query($con,"update users set password='$hash_new_password' where id='$_SESSION[user_id]' ");
+    $update = pg_query($con,"update users set password='$hash_new_password' where id='$_SESSION[user_id]' ");
 	
 	if($update){
 	echo "<script>alert('Your Password was updated successfully!')</script>";
@@ -111,7 +111,7 @@ if(isset($_POST['change_password'])){
 	
 	}else{
 	
-	 echo "<script>alert('Database query failed: mysqli_error($con) !')</script>";
+	 echo "<script>alert('Database query failed: pg_error($con) !')</script>";
 	}
 	
    }

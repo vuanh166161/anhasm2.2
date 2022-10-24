@@ -45,10 +45,10 @@
 		  
 		  $search_query = $_GET['user_query'];
 		  
-		  $run_query_by_pro_id = mysqli_query($con, "select * from products where product_keywords like '%$search_query%' ");
+		  $run_query_by_pro_id = pg_query($con, "select * from products where product_keywords like '%$search_query%' ");
 		  
 		  
-		  while($row_pro = mysqli_fetch_array($run_query_by_pro_id)){
+		  while($row_pro = pg_fetch_array($run_query_by_pro_id)){
 		  
 			  $pro_id = $row_pro['product_id'];
 			  $pro_cat = $row_pro['product_cat'];

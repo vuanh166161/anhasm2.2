@@ -28,11 +28,11 @@
  </thead>
  
  <?php 
- $all_products = mysqli_query($con,"select * from products order by product_id DESC ");
+ $all_products = pg_query($con,"select * from products order by product_id DESC ");
  
  $i = 1;
  
- while($row=mysqli_fetch_array($all_products)){
+ while($row=pg_fetch_array($all_products)){
  ?>
  
  <tbody>
@@ -73,7 +73,7 @@
 // Delete Product
 
 if(isset($_GET['delete_product'])){
-  $delete_product = mysqli_query($con,"delete from products where product_id='$_GET[delete_product]' ");
+  $delete_product = pg_query($con,"delete from products where product_id='$_GET[delete_product]' ");
   
   if($delete_product){
   echo "<script>alert('Product has been deleted successfully!')</script>";
@@ -88,14 +88,14 @@ if(isset($_POST['deleteAll'])){
   $remove = $_POST['deleteAll'];
   
   foreach($remove as $key){
-  $run_remove = mysqli_query($con,"delete from products where product_id='$key'");
+  $run_remove = pg_query($con,"delete from products where product_id='$key'");
   
   if($run_remove){
   echo "<script>alert('Items selected have been removed successfully!')</script>";
   
   echo "<script>window.open('index.php?action=view_pro','_self')</script>";
   }else{
-  echo "<script>alert('Mysqli Failed: mysqli_error($con)!')</script>";
+  echo "<script>alert('pg Failed: pg_error($con)!')</script>";
   }
   }
 }

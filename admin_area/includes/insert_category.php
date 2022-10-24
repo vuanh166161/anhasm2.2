@@ -32,9 +32,9 @@
 
 if(isset($_POST['insert_cat'])){   
    
-   $product_cat = mysqli_real_escape_string($con,$_POST['product_cat']);
+   $product_cat = pg_real_escape_string($con,$_POST['product_cat']);
    
-   $insert_cat = mysqli_query($con,"insert into categories (cat_title) values ('$product_cat') ");
+   $insert_cat = pg_query($con,"insert into categories (cat_title) values ('$product_cat') ");
    
    if($insert_cat){
     echo "<script>alert('Product category has been inserted successfully!')</script>";

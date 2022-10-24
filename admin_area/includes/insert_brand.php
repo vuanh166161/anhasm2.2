@@ -32,9 +32,9 @@
 
 if(isset($_POST['insert_brand'])){   
    
-   $product_brand = mysqli_real_escape_string($con,$_POST['product_brand']);
+   $product_brand = pg_real_escape_string($con,$_POST['product_brand']);
    
-   $insert_brand = mysqli_query($con,"insert into brands (brand_title) values ('$product_brand') ");
+   $insert_brand = pg_query($con,"insert into brands (brand_title) values ('$product_brand') ");
    
    if($insert_brand){
     echo "<script>alert('Product brand has been inserted successfully!')</script>";

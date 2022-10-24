@@ -61,9 +61,9 @@
   <div class="user_sidebar">
   
   <?php 
-  $run_image = mysqli_query($con,"select * from users where id='$_SESSION[user_id]'");
+  $run_image = pg_query($con,"select * from users where id='$_SESSION[user_id]'");
   
-  $row_image = mysqli_fetch_array($run_image);
+  $row_image = pg_fetch_array($run_image);
   
   if($row_image['image'] !=''){  
   ?>

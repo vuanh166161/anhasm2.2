@@ -1,8 +1,8 @@
 
 <?php 
-$edit_cat = mysqli_query($con,"select * from categories where cat_id='$_GET[cat_id]'");
+$edit_cat = pg_query($con,"select * from categories where cat_id='$_GET[cat_id]'");
 
-$fetch_cat = mysqli_fetch_array($edit_cat);
+$fetch_cat = pg_fetch_array($edit_cat);
 
 ?>
 
@@ -39,9 +39,9 @@ $fetch_cat = mysqli_fetch_array($edit_cat);
 
 if(isset($_POST['edit_cat'])){   
    
-   $cat_title = mysqli_real_escape_string($con,$_POST['product_cat']);
+   $cat_title = pg_real_escape_string($con,$_POST['product_cat']);
    
-   $edit_cat = mysqli_query($con,"update categories set cat_title='$cat_title' where cat_id='$_GET[cat_id]'");
+   $edit_cat = pg_query($con,"update categories set cat_title='$cat_title' where cat_id='$_GET[cat_id]'");
    
    if($edit_cat){
     echo "<script>alert('Product category was updated successfully!')</script>";

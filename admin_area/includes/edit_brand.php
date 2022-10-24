@@ -1,8 +1,8 @@
 
 <?php 
-$edit_brand = mysqli_query($con,"select * from brands where brand_id='$_GET[brand_id]'");
+$edit_brand = pg_query($con,"select * from brands where brand_id='$_GET[brand_id]'");
 
-$fetch_brand = mysqli_fetch_array($edit_brand);
+$fetch_brand = pg_fetch_array($edit_brand);
 
 ?>
 
@@ -39,9 +39,9 @@ $fetch_brand = mysqli_fetch_array($edit_brand);
 
 if(isset($_POST['edit_brand'])){   
    
-   $brand_title = mysqli_real_escape_string($con,$_POST['product_brand']);
+   $brand_title = pg_real_escape_string($con,$_POST['product_brand']);
    
-   $edit_brand = mysqli_query($con,"update brands set brand_title='$brand_title' where brand_id='$_GET[brand_id]'");
+   $edit_brand = pg_query($con,"update brands set brand_title='$brand_title' where brand_id='$_GET[brand_id]'");
    
    if($edit_brand){
     echo "<script>alert('Product brand was updated successfully!')</script>";

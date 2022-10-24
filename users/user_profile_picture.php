@@ -8,9 +8,9 @@
 
 <?php 
 
-$select_user = mysqli_query($con,"select * from users where id='$_SESSION[user_id]' ");
+$select_user = pg_query($con,"select * from users where id='$_SESSION[user_id]' ");
 
-$fetch_user = mysqli_fetch_array($select_user);
+$fetch_user = pg_fetch_array($select_user);
 ?>
 	
 <div class="register_box">
@@ -79,7 +79,7 @@ if(isset($_POST['user_profile_picture'])){
    }else{
     if(move_uploaded_file($image_tmp, $target_file)){
 	
-	$update_image = mysqli_query($con,"update users set image='$image' where id='$_SESSION[user_id]'");
+	$update_image = pg_query($con,"update users set image='$image' where id='$_SESSION[user_id]'");
 	
 	$message .= "The file" . basename($image) . " has been uploaded. ";
 	}else{

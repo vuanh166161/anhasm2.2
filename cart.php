@@ -77,15 +77,15 @@
    
    $ip = get_ip();
    
-   $run_cart = mysqli_query($con, "select * from cart where ip_address='$ip' ");
+   $run_cart = pg_query($con, "select * from cart where ip_address='$ip' ");
    
-   while($fetch_cart = mysqli_fetch_array($run_cart)){
+   while($fetch_cart = pg_fetch_array($run_cart)){
        
 	   $product_id = $fetch_cart['product_id'];
 	   
-	   $result_product = mysqli_query($con, "select * from products where product_id = '$product_id'");
+	   $result_product = pg_query($con, "select * from products where product_id = '$product_id'");
 	   
-       while($fetch_product = mysqli_fetch_array($result_product)){
+       while($fetch_product = pg_fetch_array($result_product)){
                 
 		$product_price = array($fetch_product['product_price']);
 
@@ -99,9 +99,9 @@
 		
 		// Getting Quality of the product
 		
-		$run_qty = mysqli_query($con, "select * from cart where product_id = '$product_id'");
+		$run_qty = pg_query($con, "select * from cart where product_id = '$product_id'");
 		
-		$row_qty = mysqli_fetch_array($run_qty);
+		$row_qty = pg_fetch_array($run_qty);
 		
 		$qty = $row_qty['quality'];
 		
@@ -142,7 +142,7 @@
 	     
 		 foreach($_POST['remove'] as $remove_id){
 		   
-		  $run_delete = mysqli_query($con,"delete from cart where product_id = '$remove_id' AND ip_address='$ip' ");
+		  $run_delete = pg_query($con,"delete from cart where product_id = '$remove_id' AND ip_address='$ip' ");
 		 
 		 if($run_delete){
 		    echo "<script>window.open('cart.php','_self')</script>";
